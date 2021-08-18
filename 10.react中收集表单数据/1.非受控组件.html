@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello_react</title>
+</head>
+
+<body>
+  <!-- 准备好一个容器 -->
+  <div id="test"></div>
+
+  <!-- 引入react核心库 -->
+  <script src="../js/react.development.js"></script>
+  <!-- 引入react-dom，用于支持react操作DOM -->
+  <script src="../js/react-dom.development.js"></script>
+  <!-- 映入babel，用于将jsx转为js -->
+  <script src="../js/babel.min.js"></script>
+
+  <!-- 此处一定要写babel -->
+  <script type="text/babel">
+    // 1.创建组件
+    class Login extends React.Component {
+      // 点击按钮登录
+      handleSubmit = (event) => {
+        event.preventDefault(); // 阻止表单的提交
+        const { username, password } = this;
+        alert(`你输入的用户名是：${username.value},密码是：${password.value}`);
+      }
+
+      render() {
+        console.log(this);
+        return (
+          <form action="http://www.baidu.com" onSubmit={this.handleSubmit}>
+            用户名：<input type="text" ref={c => { this.username = c }} name="username" id="username" />
+            密码：<input type="password" ref={c => { this.password = c }} name="password" id="password" />
+            <button>登录</button>
+          </form>
+        )
+      }
+    }
+
+    // 2.渲染组件到页面
+    ReactDOM.render(<Login />, document.getElementById("test"));
+  </script>
+</body>
+
+</html>
